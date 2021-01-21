@@ -1,68 +1,79 @@
-CREATE TABLE [dbo].[DimDate](
-	[DateKey] [int] NOT NULL,
-	[FullDate] [date] NOT NULL,
-	[DayNameAbrev] [nvarchar](50) NOT NULL,
-	[WeekMonSun] [nvarchar](50) NOT NULL,
-	[WeekMonSunNumber] [tinyint] NOT NULL,
-	[WeekMonSunDate] [date] NOT NULL,
-	[WeekSunSat] [nvarchar](50) NULL,
-	[WeekSunSatNumber] [tinyint] NULL,
-	[WeekSunSatDate] [date] NULL,
-	[CalendarMonth] [nvarchar](50) NOT NULL,
-	[CalendarMonthNumber] [tinyint] NOT NULL,
-	[CalendarQuarter] [nvarchar](50) NOT NULL,
-	[CalendarQuarterNumber] [tinyint] NOT NULL,
-	[CalendarYear] [nvarchar](50) NOT NULL,
-	[CalendarYearNumber] [smallint] NOT NULL,
-	[FiscalMonth] [nvarchar](50) NOT NULL,
-	[FiscalMonthNumber] [tinyint] NOT NULL,
-	[FiscalQuarter] [nvarchar](50) NOT NULL,
-	[FiscalQuarterNumber] [tinyint] NOT NULL,
-	[FiscalYear] [nvarchar](50) NOT NULL,
-	[FiscalYearNumber] [smallint] NOT NULL,
-	[IsLastDayOfMonth] [bit] NOT NULL,
-	[IsWorkDay] [bit] NOT NULL
-) ON [PRIMARY]
-
-GO
-
-
-CREATE TABLE [dbo].[DimDevice](
-	[DeviceKey] [int] IDENTITY(1,1) NOT NULL,
-	[DeviceID] [nvarchar](200) NOT NULL,
-	[DeviceName] [nvarchar](100) NOT NULL,
-	[DeviceType] [nvarchar](50) NOT NULL
-) ON [PRIMARY]
-
-GO
+CREATE TABLE RPT.DimDATE
+(
+	DateKey INT NOT NULL,
+	FullDate DATE NOT NULL,
+	DayNameAbrev VARCHAR(50) NOT NULL,
+	WeekMonSun VARCHAR(50) NOT NULL,
+	WeekMonSunNumber TINYINT NOT NULL,
+	WeekMonSunDate DATE NOT NULL,
+	WeekSunSat VARCHAR(50) NULL,
+	WeekSunSatNumber TINYINT NULL,
+	WeekSunSatDate DATE NULL,
+	CalendarMonth VARCHAR(50) NOT NULL,
+	CalendarMonthNumber TINYINT NOT NULL,
+	CalendarQuarter VARCHAR(50) NOT NULL,
+	CalendarQuarterNumber TINYINT NOT NULL,
+	CalendarYear VARCHAR(50) NOT NULL,
+	CalendarYearNumber SMALLINT NOT NULL,
+	FiscalMonth VARCHAR(50) NOT NULL,
+	FiscalMonthNumber TINYINT NOT NULL,
+	FiscalQuarter VARCHAR(50) NOT NULL,
+	FiscalQuarterNumber TINYINT NOT NULL,
+	FiscalYear VARCHAR(50) NOT NULL,
+	FiscalYearNumber SMALLINT NOT NULL,
+	IsLastDayOfMonth BIT NOT NULL,
+	IsWorkDay BIT NOT NULL,
+	CONSTRAINT DIMDATE_KEY PRIMARY KEY (DATEKEY)
+)；
 
 
-CREATE TABLE [dbo].[DimLedger](
-	[LedgerKey] [int] NOT NULL,
-	[LedgerName] [nvarchar](50) NOT NULL
-) ON [PRIMARY]
-
-GO
 
 
-CREATE TABLE [dbo].[DimProduct](
-	[ProductKey] [int] IDENTITY(1,1) NOT NULL,
-	[ProductID] [nvarchar](500) NOT NULL,
-	[ProductName] [nvarchar](500) NOT NULL,
-	[EditorialLevel1] [nvarchar](200) NOT NULL,
-	[EditorialLevel2] [nvarchar](200) NOT NULL
-) ON [PRIMARY]
+CREATE TABLE RPT.DimDevice
+(
+	DeviceKey INT NOT NULL AUTO_INCREMENT,
+	DeviceID VARCHAR(200) NOT NULL,
+	DeviceName VARCHAR(100) NOT NULL,
+	DeviceType VARCHAR(50) NOT NULL,
+	CONSTRAINT DIMDEVICE_KEY PRIMARY KEY (DeviceKey)
+);
 
-GO
 
 
-CREATE TABLE [dbo].[FactPagePerformance](
-	[DateKey] [int] NOT NULL,
-	[ProductKey] [int] NOT NULL,
-	[DeviceKey] [int] NOT NULL,
-	[LedgerKey] [int] NOT NULL,
-	[PageViews] [int] NOT NULL,
-	[Visits] [int] NOT NULL,
-	[UniqueVisitors] [int] NOT NULL
-) ON [PRIMARY]
+
+CREATE TABLE RPT.DimLedger
+(
+	LedgerKey INT NOT NULL,
+	LedgerName VARCHAR(50) NOT NULL,
+	CONSTRAINT DIMLEDGER_KEY PRIMARY KEY (LedgerKey)
+);
+
+
+
+
+CREATE TABLE RPT.DimProduct
+(
+	ProductKey INT NOT NULL AUTO_INCREMENT,
+	ProductID VARCHAR(500) NOT NULL,
+	ProductName VARCHAR(500) NOT NULL,
+	EditorialLevel1 VARCHAR(200) NOT NULL,
+	EditorialLevel2 VARCHAR(200) NOT NULL,
+	CONSTRAINT IMPRODUCT_KEY PRIMARY KEY (ProductKey)
+);
+
+
+
+
+CREATE TABLE RPT.FactPagePerformance
+(
+	DATEKey INT NOT NULL,
+	ProductKey INT NOT NULL,
+	DeviceKey INT NOT NULL,
+	LedgerKey INT NOT NULL,
+	PageViews INT NOT NULL,
+	Visits INT NOT NULL,
+	UniqueVisitors INT NOT NULL,
+);
+
+COMMIT;
 
