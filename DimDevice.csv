@@ -1,4 +1,5 @@
-﻿-2,other,Other,Other
+DiviceKey,DeviceID,DeviceName,DeviceType
+-2,other,Other,Other
 1,desktop,Desktop,Desktop
 2,tablet,Tablet,Tablet
 3,phone,Phone,Phone
